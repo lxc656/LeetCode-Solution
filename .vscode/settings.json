@@ -1,0 +1,25 @@
+{
+    "files.associations": {
+        "__hash_table": "cpp",
+        "unordered_map": "cpp",
+        "__node_handle": "cpp",
+        "__split_buffer": "cpp",
+        "__tree": "cpp",
+        "array": "cpp",
+        "bitset": "cpp",
+        "initializer_list": "cpp",
+        "map": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "iterator": "cpp",
+        "utility": "cpp",
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "__bit_reference": "cpp",
+        "chrono": "cpp",
+        "algorithm": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}
