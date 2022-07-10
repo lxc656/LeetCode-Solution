@@ -6,9 +6,7 @@
 
 # lc 125
 
-
-
-# lc 5
+## lc 5
 
 [原题链接](https://leetcode-cn.com/problems/longest-palindromic-substring/)
 
@@ -47,9 +45,7 @@ public:
 
 # lc 167
 
-
-
-# lc 15
+## lc 15
 
 [题目链接](https://leetcode-cn.com/problems/3sum/)
 
@@ -84,7 +80,7 @@ public:
 
 为了实现完全的去重，在枚举到`nums[i+1]`的时候，如果发现`nums[i+1]==mus[i]`，那么就直接跳过，对`j`的处理逻辑也同理
 
-# lc 16
+## lc 16
 
 [题目链接](https://leetcode.cn/problems/3sum-closest/)
 
@@ -131,7 +127,7 @@ public:
 };
 ```
 
-# lc 18
+## lc 18
 
 [题目链接](https://leetcode.cn/problems/4sum/)
 
@@ -177,9 +173,7 @@ btw，如果推广到n数之和那就是背包问题了
 
 # lc 277
 
-
-
-# lc 11
+## lc 11
 
 [题目链接](https://leetcode.cn/problems/container-with-most-water/)
 
@@ -239,15 +233,47 @@ public:
 
 # lc 424
 
-
-
-# lc 76
+## lc 76
 
 [题目链接](https://leetcode.cn/problems/minimum-window-substring/)
 
+使用滑动窗口/双指针来解决，左指针为j，右指针为i，求出对于每个i可能位于的位置，满足条件的离它最近的j即可，并且随着i向右移动，离他最近的满足条件的j也随之向右移动（可以反证）
 
+那么如何快速判断一个区间里是否包含子串`t`当中的所有字符呢？先用一个哈希表统计`t`当中每个字符出现的次数，再用一个哈希表记录窗口内每个字符出现的次数，在窗口滑动的时候去动态维护这两个哈希表，同时统计当前滑动窗口当中包含了几个`t`中的字符
 
-# lc 3
+代码实现如下：
+
+```cpp
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        string ans;
+        int cnt = 0;
+        unordered_map<char, int> map1, map2;
+        for(auto x:t) {
+            map1[x]++;
+        }
+        for(int l=0, r=0; r<s.size(); r++) {
+            if(map1[s[r]] > map2[s[r]]) {
+                cnt++;
+            }
+            map2[s[r]]++;
+            while(map2[s[l]] > map1[s[l]] && r > l && l < s.size()) {
+                map2[s[l]]--;
+                l++;
+            }
+            if(cnt == t.size()) {
+                if(ans.empty() || r-l+1 < ans.size()) {
+                    ans = s.substr(l, r-l+1);
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
+## lc 3
 
 [题目链接](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
 

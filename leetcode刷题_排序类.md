@@ -1,12 +1,10 @@
 p.s. 本archive参考的是知乎上的一位前辈所总结出的准备算法面试的leetcode刷题清单（[链接在这里](https://zhuanlan.zhihu.com/p/349940945)），以及[acwing](www.acwing.com)上leetcode系列的题解
 
- 关于快速排序和归并排序的知识可以参考笔者的[这篇笔记](https://zhuanlan.zhihu.com/p/472751641)
+本篇文章主要是对LeetCode中经典排序类题目的题解，关于快速排序和归并排序的知识可以参考笔者的[这篇笔记](https://zhuanlan.zhihu.com/p/472751641)，在接下来的题目中也基本只会用到这两种排序
 
-（在接下来的题目中也基本只会用到这两种排序）
+## leetcode 148
 
-# leetcode 148
-
-题目的大致意思：给你链表的头结点 `head` ，请将其按 **升序** 排列并返回 **排序后的链表**，在 `O(n log n)` 时间复杂度和常数级空间复杂度下，对链表进行排序
+[题目链接](https://leetcode.cn/problems/sort-list/)
 
 首先回顾一下适用于链表的各种排序算法的时空复杂度：
 
@@ -72,7 +70,7 @@ public:
 };
 ```
 
-# leetcode 56
+## leetcode 56
 
 [题目链接](https://leetcode.cn/problems/merge-intervals/)
 
@@ -112,17 +110,56 @@ public:
 };
 ```
 
-# leetcode 179
+## leetcode 179
 
 
 
-# leetcode 75
+## leetcode 75
+
+[题目链接](https://leetcode.cn/problems/sort-colors/)
+
+本题借助三个指针来完成，指针i和j从左往右扫描，指针k从右往左扫描，在扫描的过程中保证从0~j-1都是0，从j~i-1都是1，从k+1~`nums.size()-1`都是2，如下图所示：
+
+![截屏2022-07-05 23.40.08.png](https://pic.leetcode-cn.com/1657035668-gTVsLN-%E6%88%AA%E5%B1%8F2022-07-05%2023.40.08.png)
+
+在扫描的时候i每次往后移动一位，每次往后移动i的时候维护一下j和k，当i>=k的时候就可以保证排好序了
+
+如果a[i] == 0，那么交换a[i]和a[j]，i++，j++，如果a[i] == 2，那么交换a[i]和a[k]，k--，如果a[i] == 1，那么i++，可以看到每次要么i自增，要么k自减，它们迟早会相遇，并且我们只扫描了一遍，时间复杂度是O(N)
+
+y总评价：很难想出来这个解法，背过就行了（
+
+代码实现：
+
+```c++
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int i=0, j=0, k=nums.size()-1; 
+        while(i<=k) {
+            if(nums[i] == 1) {
+                i++;
+            }
+            else if(nums[i] == 0) {
+                swap(nums[i], nums[j]);
+                j++;
+                i++;
+            }
+            else if(nums[i] == 2) {
+                swap(nums[i], nums[k]);
+                k--;
+            }
+        }
+    }
+};
+```
+
+当然还有个不符合lc要求但是非常简单无脑的做法：从左往右扫描一遍，记录下来有几个0，几个1，几个2，然后相应地构造出来答案数组即可
+
+## leetcode 215
 
 
 
-# leetcode 215
+## leetcode 4
 
 
-
-# leetcode 4
 
